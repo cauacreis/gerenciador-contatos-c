@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "contatos.h"
 
+
 int main() {
     Contato agenda[MAX_CONTATOS]; 
     int totalContatos = 0;
