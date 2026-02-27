@@ -2,10 +2,12 @@
 #include "contatos.h"
 
 int main() {
-    Contato agenda[MAX_CONTATOS]; // Nosso array de structs
+    Contato agenda[MAX_CONTATOS]; 
     int totalContatos = 0;
     int opcao;
 
+    // 1. CARREGA OS DADOS SALVOS ASSIM QUE O PROGRAMA ABRE
+    carregarContatos(agenda, &totalContatos);
     do {
         printf("\n=== GERENCIADOR DE CONTATOS ===\n");
         printf("1. Cadastrar\n");
@@ -43,6 +45,8 @@ int main() {
                 break;
             }
             case 7:
+                // Agora sim ele salva os dados no arquivo contatos.txt antes de fechar!
+                salvarContatos(agenda, totalContatos); 
                 printf("Encerrando o programa...\n");
                 break;
             default:

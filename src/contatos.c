@@ -127,3 +127,51 @@ int contarDominioRecursivo(Contato *agenda, int total, int indice, char *dominio
     // Chamada recursiva para o próximo índice
     return temDominio + contarDominioRecursivo(agenda, total, indice + 1, dominio);
 }
+// --- PERSISTÊNCIA EM ARQUIVO TEXTO ---
+
+void salvarContatos(Contato *agenda, int total) {
+    FILE *arquivo = fopen("contatos.txt", "w"); // "w" abre para escrita (write)
+    if (arquivo == NULL) {
+        printf("Erro ao criar o arquivo de contatos!\n");
+        return;
+    }
+    
+    // Salva no formato: Nome;Telefone;E-mail
+    for (int i = 0; i < total; i++) {
+        fprintf(arquivo, "%s;%s;%s\n", agenda[i].nome, agenda[i].telefone, agenda[i].email);
+    }
+    
+    fclose(arquivo);
+    printf("Contatos salvos no disco com sucesso!\n");
+}
+
+void carregarContatos(Contato *agenda, int *total) {
+    FILE *arquivo = fopen("contatos.txt", "r"); // "r" abre para leitura (read)
+    if (arquivo == NULL) {
+        // É normal falhar na primeira vez se o arquivo "contatos.txt" ainda não existir
+        return; 
+    }
+    
+    *total = 0;
+    char linha[150];
+    
+    // Lê linha por linha até o fim do arquivo
+    while (fgets(linha, sizeof(linha), arquivo) != NULL && *total < MAX_CONTATOS) {
+        linha[strcspn(linha, "\n")] = 0; // Remove o \n
+        
+        // strtok divide a string toda vez que encontra um ";"
+        char *token = strtok(linha, ";");
+        if (token != NULL) strcpy(agenda[*total].nome, token);
+        
+        token = strtok(NULL, ";");
+        if (token != NULL) strcpy(agenda[*total].telefone, token);
+        
+        token = strtok(NULL, ";");
+        if (token != NULL) strcpy(agenda[*total].email, token);
+        
+        (*total)++;
+    }
+    
+    fclose(arquivo);
+    printf("Dados carregados! %d contato(s) na memoria.\n", *total);
+}

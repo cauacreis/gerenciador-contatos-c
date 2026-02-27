@@ -20,4 +20,8 @@ void excluirContato(Contato *agenda, int *total);
 // Função recursiva exigida pelo projeto
 int contarDominioRecursivo(Contato *agenda, int total, int indice, char *dominio);
 
+// Funções de manipulação de arquivo (Requisito Opcional)
+void salvarContatos(Contato *agenda, int total);
+void carregarContatos(Contato *agenda, int *total);
+
 #endif
