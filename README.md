@@ -4,7 +4,6 @@
 * Rafael Farias – 2510314
 * Cauã Felype – 2510189
 * Gabryel Rodrigues – 2510200
-* Roger Prado – 2512516
 
 Projeto prático desenvolvido para o Ciclo 1 da disciplina de Laboratório de Programação do curso de Engenharia de Software da **UniEVANGÉLICA** (2026/1).
 
